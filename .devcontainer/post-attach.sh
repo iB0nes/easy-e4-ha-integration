@@ -92,7 +92,7 @@ check_if_needs_initialization() {
     fi
 
     # Check 2: Template domain must still exist
-    if ! grep -q "ha_integration_domain" custom_components/*/manifest.json 2>/dev/null; then
+    if ! grep -q "eaton_easy_e4" custom_components/*/manifest.json 2>/dev/null; then
         return 1 # Already initialized (domain renamed)
     fi
 

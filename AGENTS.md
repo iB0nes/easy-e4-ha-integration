@@ -36,14 +36,14 @@ contributor's fork of the template is not a copy awaiting initialisation.
 
 **Identity — use these everywhere, never a variant:**
 
-- **Domain:** `ha_integration_domain`
+- **Domain:** `eaton_easy_e4`
 - **Title:** Integration Blueprint
 - **Class prefix:** `IntegrationBlueprint`
 - **Repository:** jpawlowski/hacs.integration_blueprint
 
 **Key directories:**
 
-- `custom_components/ha_integration_domain/` — integration code
+- `custom_components/eaton_easy_e4/` — integration code
 - `config/` — Home Assistant configuration for local testing
 - `tests/` — mirrors the integration structure
 - `script/` — development and validation scripts

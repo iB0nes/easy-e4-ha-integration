@@ -207,15 +207,15 @@ check_if_already_initialized() {
     local commit_count
 
     # Check 1: Is custom_components directory already customized?
-    if [[ -d "custom_components" ]] && [[ ! -d "custom_components/ha_integration_domain" ]]; then
+    if [[ -d "custom_components" ]] && [[ ! -d "custom_components/eaton_easy_e4" ]]; then
         # The template domain doesn't exist, so it's been renamed
         return 0  # Already initialized
     fi
 
     # Check 2: Does manifest.json have a different domain?
-    if [[ -f "custom_components/ha_integration_domain/manifest.json" ]]; then
-        current_domain=$(grep -o '"domain"[[:space:]]*:[[:space:]]*"[^"]*"' custom_components/ha_integration_domain/manifest.json | cut -d'"' -f4)
-        if [[ -n "$current_domain" ]] && [[ "$current_domain" != "ha_integration_domain" ]]; then
+    if [[ -f "custom_components/eaton_easy_e4/manifest.json" ]]; then
+        current_domain=$(grep -o '"domain"[[:space:]]*:[[:space:]]*"[^"]*"' custom_components/eaton_easy_e4/manifest.json | cut -d'"' -f4)
+        if [[ -n "$current_domain" ]] && [[ "$current_domain" != "eaton_easy_e4" ]]; then
             return 0  # Domain already changed
         fi
     fi
@@ -829,7 +829,7 @@ replace_in_files() {
         "./config/blueprints"            # HA blueprints
         "./config/custom_components/hacs" # HACS installation (not our integration)
         # Note: config/configuration.yaml is negated in gitignore, will be added back later
-        # Note: custom_components/ha_integration_domain/ is negated, will be added back later
+        # Note: custom_components/eaton_easy_e4/ is negated, will be added back later
     )
 
     # Additional file exclusions in config/ directory (runtime files, logs, databases)
@@ -918,7 +918,7 @@ replace_in_files() {
 
     # Add explicitly negated files from gitignore (files that should be included despite wildcards)
     # Example: config/* excludes everything, but !config/configuration.yaml brings it back
-    # Example: custom_components/* excludes all, but !custom_components/ha_integration_domain/ brings it back
+    # Example: custom_components/* excludes all, but !custom_components/eaton_easy_e4/ brings it back
     for negate in "${gitignore_negate[@]}"; do
         local negate_path="./${negate#./}"
 
@@ -1495,14 +1495,14 @@ main() {
     remove_blueprint_specific_files
 
     # Rename directory (do this before replacements to avoid double work)
-    rename_directory "custom_components/ha_integration_domain" "custom_components/$domain"
+    rename_directory "custom_components/eaton_easy_e4" "custom_components/$domain"
 
     echo ""
     print_color "$CYAN" "Step 2: Text replacements in remaining files..."
     echo ""
 
     # Replace domain
-    replace_in_files "ha_integration_domain" "$domain" "domain name"
+    replace_in_files "eaton_easy_e4" "$domain" "domain name"
 
     # Replace title (handle both cases)
     replace_in_files "Integration Blueprint" "$title" "integration title"

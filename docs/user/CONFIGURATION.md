@@ -87,7 +87,7 @@ Disabled entities won't update or consume resources.
 
 The integration provides the following services:
 
-### `ha_integration_domain.refresh_data`
+### `eaton_easy_e4.refresh_data`
 
 Fetch the current device state immediately instead of waiting for the next poll.
 
@@ -103,7 +103,7 @@ whether the refresh actually produced data.
 **Example:**
 
 ```yaml
-action: ha_integration_domain.refresh_data
+action: eaton_easy_e4.refresh_data
 data:
   config_entry_id: 01JG3T2Q6Z9K4V8P0N5R7X2M1A
 ```
@@ -117,7 +117,7 @@ automation:
       - trigger: sun
         event: sunset
     action:
-      - action: ha_integration_domain.refresh_data
+      - action: eaton_easy_e4.refresh_data
         data:
           config_entry_id: 01JG3T2Q6Z9K4V8P0N5R7X2M1A
 ```
@@ -194,7 +194,7 @@ blueprint:
       selector:
         entity:
           domain: sensor
-          integration: ha_integration_domain
+          integration: eaton_easy_e4
     threshold:
       name: Threshold
       selector:

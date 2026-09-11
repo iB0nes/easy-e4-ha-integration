@@ -171,7 +171,7 @@ You'll need these installed locally:
 > [!NOTE]
 > Both Codespaces and local DevContainer provide the exact same experience. After the container is ready, run `./initialize.sh` to customize your integration. The only difference is where the container runs (GitHub's cloud vs. your machine).
 
-Then customize the API client in [`api/client.py`](custom_components/ha_integration_domain/api/client.py) to connect to your actual device or service.
+Then customize the API client in [`api/client.py`](custom_components/eaton_easy_e4/api/client.py) to connect to your actual device or service.
 
 ---
 
@@ -270,7 +270,7 @@ The `initialize.sh` script supports both interactive and unattended modes:
 The script will:
 
 - ✅ Validate your domain name and check for conflicts with existing integrations
-- ✅ Replace all placeholders (`ha_integration_domain`, `Integration Blueprint`, etc.)
+- ✅ Replace all placeholders (`eaton_easy_e4`, `Integration Blueprint`, etc.)
 - ✅ Rename the custom_components directory to match your domain
 - ✅ Update the LICENSE with your name and current year
 - ✅ Replace README.md with a customized version from README.template.md
@@ -414,7 +414,7 @@ This section documents the project layout and the reasoning behind the package-b
 <summary><strong>Project structure</strong></summary>
 
 ```text
-custom_components/ha_integration_domain/  # Your integration code
+custom_components/eaton_easy_e4/  # Your integration code
 ├── __init__.py                # Integration setup and entry point
 ├── config_flow.py             # Config flow entry point (delegates to handler)
 ├── const.py                   # Constants and configuration
@@ -569,7 +569,7 @@ This section explains the key features and patterns used in this integration blu
 
 ### Config flow
 
-The config flow is organized in the [`config_flow_handler/`](custom_components/ha_integration_domain/config_flow_handler/) package. Users can:
+The config flow is organized in the [`config_flow_handler/`](custom_components/eaton_easy_e4/config_flow_handler/) package. Users can:
 
 - Add the integration through Settings → Devices & Services
 - Enter credentials (or other configuration)
@@ -578,10 +578,10 @@ The config flow is organized in the [`config_flow_handler/`](custom_components/h
 
 **Package structure:**
 
-- [`config_flow.py`](custom_components/ha_integration_domain/config_flow_handler/config_flow.py) - User setup, reauth and reconfigure
-- [`options_flow.py`](custom_components/ha_integration_domain/config_flow_handler/options_flow.py) - Options flow for the poll interval
-- [`schemas/`](custom_components/ha_integration_domain/config_flow_handler/schemas/) - Voluptuous schemas for input validation
-- [`validators/`](custom_components/ha_integration_domain/config_flow_handler/validators/) - Custom validators
+- [`config_flow.py`](custom_components/eaton_easy_e4/config_flow_handler/config_flow.py) - User setup, reauth and reconfigure
+- [`options_flow.py`](custom_components/eaton_easy_e4/config_flow_handler/options_flow.py) - Options flow for the poll interval
+- [`schemas/`](custom_components/eaton_easy_e4/config_flow_handler/schemas/) - Voluptuous schemas for input validation
+- [`validators/`](custom_components/eaton_easy_e4/config_flow_handler/validators/) - Custom validators
 
 Shared flow logic goes in `handler.py`, and a subentry flow in `subentry_flow.py`, once the
 integration needs either.
@@ -595,7 +595,7 @@ integration needs either.
 
 ### DataUpdateCoordinator
 
-The [`coordinator/`](custom_components/ha_integration_domain/coordinator/) package efficiently manages data fetching:
+The [`coordinator/`](custom_components/eaton_easy_e4/coordinator/) package efficiently manages data fetching:
 
 - **Single API call**: Instead of each entity polling separately, the coordinator fetches data once
 - **Shared data**: All entities receive the same data, reducing API load
@@ -606,7 +606,7 @@ This is the recommended pattern in Home Assistant Core for any integration that 
 
 ### Translation keys
 
-All user-facing strings use translation keys instead of hardcoded English text. See [`translations/en.json`](custom_components/ha_integration_domain/translations/en.json).
+All user-facing strings use translation keys instead of hardcoded English text. See [`translations/en.json`](custom_components/eaton_easy_e4/translations/en.json).
 
 **Benefits:**
 
@@ -618,7 +618,7 @@ The config flow, entity states, and error messages all support translations.
 
 ### Diagnostics
 
-The [`diagnostics.py`](custom_components/ha_integration_domain/diagnostics.py) file provides debug information that users can download from the UI:
+The [`diagnostics.py`](custom_components/eaton_easy_e4/diagnostics.py) file provides debug information that users can download from the UI:
 
 - Device information
 - Configuration details (with sensitive data redacted)
@@ -632,46 +632,46 @@ Users can share this file when reporting issues without exposing passwords or to
 
 The blueprint includes multiple entity types organized as packages to demonstrate different patterns:
 
-**Sensors** ([`sensor/`](custom_components/ha_integration_domain/sensor/))
+**Sensors** ([`sensor/`](custom_components/eaton_easy_e4/sensor/))
 
 - Shows how to create sensors with state values
 - Demonstrates state classes and device classes
 - Examples:
-  - [`air_quality.py`](custom_components/ha_integration_domain/sensor/air_quality.py) - Air quality index sensor
-  - [`diagnostic.py`](custom_components/ha_integration_domain/sensor/diagnostic.py) - Diagnostic sensor
+  - [`air_quality.py`](custom_components/eaton_easy_e4/sensor/air_quality.py) - Air quality index sensor
+  - [`diagnostic.py`](custom_components/eaton_easy_e4/sensor/diagnostic.py) - Diagnostic sensor
 
-**Binary Sensors** ([`binary_sensor/`](custom_components/ha_integration_domain/binary_sensor/))
+**Binary Sensors** ([`binary_sensor/`](custom_components/eaton_easy_e4/binary_sensor/))
 
 - Shows binary (on/off) sensors
 - Uses device classes for proper icons
-- Example: [`filter.py`](custom_components/ha_integration_domain/binary_sensor/filter.py) - Filter replacement indicator
+- Example: [`filter.py`](custom_components/eaton_easy_e4/binary_sensor/filter.py) - Filter replacement indicator
 
-**Switches** ([`switch/`](custom_components/ha_integration_domain/switch/))
+**Switches** ([`switch/`](custom_components/eaton_easy_e4/switch/))
 
 - Shows controllable entities that interact with the API
 - Implements `turn_on` and `turn_off` methods
 - Demonstrates error handling for control commands
-- Example: [`example_switch.py`](custom_components/ha_integration_domain/switch/example_switch.py) - Example switch entity
+- Example: [`example_switch.py`](custom_components/eaton_easy_e4/switch/example_switch.py) - Example switch entity
 
-**Select Entities** ([`select/`](custom_components/ha_integration_domain/select/))
+**Select Entities** ([`select/`](custom_components/eaton_easy_e4/select/))
 
 - Shows dropdown selection entities
-- Example: [`fan_speed.py`](custom_components/ha_integration_domain/select/fan_speed.py) - Fan speed selector
+- Example: [`fan_speed.py`](custom_components/eaton_easy_e4/select/fan_speed.py) - Fan speed selector
 
-**Number Entities** ([`number/`](custom_components/ha_integration_domain/number/))
+**Number Entities** ([`number/`](custom_components/eaton_easy_e4/number/))
 
 - Shows numeric input entities
-- Example: [`target_humidity.py`](custom_components/ha_integration_domain/number/target_humidity.py) - Target humidity setter
+- Example: [`target_humidity.py`](custom_components/eaton_easy_e4/number/target_humidity.py) - Target humidity setter
 
-**Button Entities** ([`button/`](custom_components/ha_integration_domain/button/))
+**Button Entities** ([`button/`](custom_components/eaton_easy_e4/button/))
 
 - Shows action button entities
-- Example: [`reset_filter.py`](custom_components/ha_integration_domain/button/reset_filter.py) - Filter reset button
+- Example: [`reset_filter.py`](custom_components/eaton_easy_e4/button/reset_filter.py) - Filter reset button
 
-**Fan Entities** ([`fan/`](custom_components/ha_integration_domain/fan/))
+**Fan Entities** ([`fan/`](custom_components/eaton_easy_e4/fan/))
 
 - Shows fan control entities
-- Example: [`air_purifier_fan.py`](custom_components/ha_integration_domain/fan/air_purifier_fan.py) - Air purifier fan control
+- Example: [`air_purifier_fan.py`](custom_components/eaton_easy_e4/fan/air_purifier_fan.py) - Air purifier fan control
 
 Each platform package shows best practices for entity setup, naming, and data handling.
 
@@ -679,7 +679,7 @@ Each platform package shows best practices for entity setup, naming, and data ha
 
 ### API client
 
-The API client is organized in the [`api/`](custom_components/ha_integration_domain/api/) package:
+The API client is organized in the [`api/`](custom_components/eaton_easy_e4/api/) package:
 
 **Modern patterns:**
 
@@ -694,7 +694,7 @@ The API client is organized in the [`api/`](custom_components/ha_integration_dom
 - `IntegrationBlueprintApiClientAuthenticationError` - Invalid credentials (401/403)
 - `IntegrationBlueprintApiClientCommunicationError` - Network or connection errors
 
-Replace the dummy API calls in [`api/client.py`](custom_components/ha_integration_domain/api/client.py) with your actual device/service API.
+Replace the dummy API calls in [`api/client.py`](custom_components/eaton_easy_e4/api/client.py) with your actual device/service API.
 
 <details>
 <summary><strong>Development container</strong></summary>
@@ -825,7 +825,7 @@ from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 async def test_setup_entry(hass: HomeAssistant) -> None:
     """Test setting up the integration."""
-    entry = MockConfigEntry(domain="ha_integration_domain", data={...})
+    entry = MockConfigEntry(domain="eaton_easy_e4", data={...})
     assert await hass.config_entries.async_setup(entry.entry_id)
 ```
 

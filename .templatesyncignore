@@ -14,12 +14,12 @@ custom_components/
 # ── Tests ────────────────────────────────────────────────────
 # Test files reference your integration domain (set by initialize.sh).
 # Future test files added by the blueprint would arrive with
-# ha_integration_domain hard-coded, breaking your imports.
+# eaton_easy_e4 hard-coded, breaking your imports.
 tests/
 
 # ── Project configuration ─────────────────────────────────────
 # These files are customized for your integration during initialization
-# (initialize.sh replaces ha_integration_domain and related strings).
+# (initialize.sh replaces eaton_easy_e4 and related strings).
 # Syncing them back would revert those substitutions.
 pyproject.toml
 .yamllint.yml

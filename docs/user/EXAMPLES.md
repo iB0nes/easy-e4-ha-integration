@@ -50,7 +50,7 @@ automation:
       - trigger: time
         at: "03:00:00"
     action:
-      - action: ha_integration_domain.refresh_data
+      - action: eaton_easy_e4.refresh_data
         data:
           config_entry_id: 01JG3T2Q6Z9K4V8P0N5R7X2M1A
 ```
@@ -70,7 +70,7 @@ blueprint:
       selector:
         entity:
           domain: sensor
-          integration: ha_integration_domain
+          integration: eaton_easy_e4
     threshold:
       name: Threshold value
       selector:

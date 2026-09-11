@@ -5,7 +5,7 @@ This document describes the technical architecture of the Integration Blueprint 
 ## Directory Structure
 
 ```text
-custom_components/ha_integration_domain/
+custom_components/eaton_easy_e4/
 ├── __init__.py              # Integration setup and unload
 ├── config_flow.py           # Config flow entry point
 ├── const.py                 # Constants and configuration keys
@@ -204,7 +204,7 @@ To add new functionality:
 
 ### Adding a New Platform
 
-1. Create directory: `custom_components/ha_integration_domain/<platform>/`
+1. Create directory: `custom_components/eaton_easy_e4/<platform>/`
 2. Implement `__init__.py` with `async_setup_entry()`
 3. Create entity classes inheriting from platform base + `IntegrationBlueprintEntity`
 4. Add platform to `PLATFORMS` in `__init__.py`
